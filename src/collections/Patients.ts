@@ -17,38 +17,37 @@ export const Patients: CollectionConfig = {
     useAsTitle: 'patientName',
   },
   fields: [
-     {
-          name: 'patientName',
-          type: 'text',
-          required: true,
+    {
+      name: 'patientName',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'doctorAssigned',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar',
       },
-      {
-          name: 'doctorAssigned',
-          type: 'relationship',
-          admin: {
-              position: 'sidebar',
-          },
-          relationTo: 'doctors',
-          hasMany: false,
-          required: true,
+      relationTo: 'doctors',
+      hasMany: false,
+      required: true,
+    },
+    {
+      name: 'emiratesId',
+      type: 'number',
+      admin: {
+        position: 'sidebar',
       },
-      {
-          name: 'emiratesId',
-          type: 'number',
-          admin: {
-              position: 'sidebar',
-          },
-          required: true,
-          validate: (value) => {
-            console.log(value)
-              if (Boolean(value.toString().length >= 14)) {
-                  return true;
-              } else {
-                  return 'Emirates ID must be 14 digits';
-              }
-          }
-      }
-      
+      required: true,
+      validate: (value: any) => {
+        console.log(value)
+        if (Boolean(value.toString().length >= 14)) {
+          return true
+        } else {
+          return 'Emirates ID must be 14 digits'
+        }
+      },
+    },
   ],
   timestamps: true,
 }
