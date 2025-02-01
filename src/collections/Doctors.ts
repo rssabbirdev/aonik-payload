@@ -13,25 +13,24 @@ export const Doctors: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['doctorName', 'specialization','room'],
+    defaultColumns: ['doctorName', 'specialization', 'room'],
     useAsTitle: 'doctorName',
   },
   fields: [
     {
       name: 'doctorName',
-          type: 'text',
+      type: 'text',
       required: true,
-      },
-      {
-          name: 'specialization',
-          type: 'text',
-      },
-      {
-          name: 'room',
-          type: 'number',
-          required: true,
-      }
-      
+    },
+    {
+      name: 'specialization',
+      type: 'text',
+    },
+    {
+      name: 'room',
+      type: 'text',
+      required: true,
+    },
   ],
   timestamps: true,
 }

@@ -17,7 +17,7 @@ export interface Config {
     categories: Category;
     users: User;
     doctors: Doctor;
-    patients: Patient;
+    appointments: Appointment;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -35,7 +35,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     doctors: DoctorsSelect<false> | DoctorsSelect<true>;
-    patients: PatientsSelect<false> | PatientsSelect<true>;
+    appointments: AppointmentsSelect<false> | AppointmentsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -682,19 +682,20 @@ export interface Doctor {
   id: string;
   doctorName: string;
   specialization?: string | null;
-  room: number;
+  room: string;
   updatedAt: string;
   createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "patients".
+ * via the `definition` "appointments".
  */
-export interface Patient {
+export interface Appointment {
   id: string;
   patientName: string;
-  doctorAssigned: string | Doctor;
+  appointmentWith: string | Doctor;
   emiratesId: number;
+  serialNumber: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -895,8 +896,8 @@ export interface PayloadLockedDocument {
         value: string | Doctor;
       } | null)
     | ({
-        relationTo: 'patients';
-        value: string | Patient;
+        relationTo: 'appointments';
+        value: string | Appointment;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1268,12 +1269,13 @@ export interface DoctorsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "patients_select".
+ * via the `definition` "appointments_select".
  */
-export interface PatientsSelect<T extends boolean = true> {
+export interface AppointmentsSelect<T extends boolean = true> {
   patientName?: T;
-  doctorAssigned?: T;
+  appointmentWith?: T;
   emiratesId?: T;
+  serialNumber?: T;
   updatedAt?: T;
   createdAt?: T;
 }
