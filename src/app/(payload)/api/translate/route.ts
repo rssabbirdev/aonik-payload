@@ -45,7 +45,9 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // Set in .env.local
 })
 
-const client = new TextToSpeechClient({ keyFilename: './google-service-account.json' })
+const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || '{}')
+
+const client = new TextToSpeechClient({ credentials })
 
 export async function POST(req: NextRequest) {
   if (req.method !== 'POST') return NextResponse.json({ message: 'Method Not Allowed' })
