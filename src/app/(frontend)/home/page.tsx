@@ -211,6 +211,7 @@ function HomePage() {
             background: "url('/bg.png')",
             backgroundRepeat: 'no-repeat',
             backgroundPosition: '100% 50%',
+            zIndex: '-9999',
           }}
         ></div>
       </section>
