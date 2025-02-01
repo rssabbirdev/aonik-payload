@@ -10,10 +10,12 @@ function AppointmentPage() {
   const [eid, setEid] = useState('')
   const [appointment, setAppointment] = useState<Appointment>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState('')
   const today = new Date().toISOString().split('T')[0]
   console.log(today)
   console.log(eid)
   const handleSearchAppointment = (eidText: string) => {
+    setError('')
     if (eidText?.length === 14) {
       setIsLoading(true)
       fetch(
@@ -24,6 +26,9 @@ function AppointmentPage() {
           console.log(data)
           setAppointment(data?.docs[0])
           setIsLoading(false)
+          if (!data?.docs[0]?.id) {
+            setError('No Appointment Found For Today!')
+          }
         })
         .catch((error) => {
           setIsLoading(false)
@@ -87,6 +92,9 @@ function AppointmentPage() {
             <span>Location Guide</span>
           </Link>
         </section>
+      )}
+      {!appointment?.id && error && !isLoading && (
+        <h2 className="mt-10 text-red-600 text-center">{error}</h2>
       )}
     </>
   )
