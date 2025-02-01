@@ -91,19 +91,12 @@ export async function POST(req: NextRequest) {
       voice: { languageCode: targetLang === 'English' ? 'en-US' : 'ar-XA', ssmlGender: 'NEUTRAL' },
       audioConfig: { audioEncoding: 'MP3' },
     })
-
-    console.log('response', response)
-
-    const writeFile = util.promisify(fs.writeFile)
-
-    const filePath = `./public/output.mp3` // Save the audio to the public folder
-
-    await writeFile(filePath, response.audioContent as string, 'binary')
-
+    // Convert buffer to base64 properly
+    const audioBase64 = Buffer.from(response.audioContent as Uint8Array).toString('base64')
     return new NextResponse(
       JSON.stringify({
-        translatedText,
-        filePath: `/output.mp3?${new Date()}`,
+        translatedText: translatedText,
+        audio: `data:audio/mpeg;base64,${audioBase64}`,
       }),
       {
         status: 200,

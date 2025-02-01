@@ -169,13 +169,13 @@ function TranslatorPage() {
       })
 
       const data = await response.json()
-      console.log(data)
+      console.log('check error from client', data)
       if (sourceLang === 'English') {
         setConvertation([
           ...(conversation ?? []),
           {
             conversationFirstText: text,
-            conversationSecondText: data.translatedText,
+            conversationSecondText: data?.translatedText,
             conversationLanguage: sourceLang,
           },
         ])
@@ -183,7 +183,7 @@ function TranslatorPage() {
         setConvertation([
           ...(conversation ?? []),
           {
-            conversationFirstText: data.translatedText,
+            conversationFirstText: data?.translatedText,
             conversationSecondText: text,
             conversationLanguage: sourceLang,
           },
@@ -192,8 +192,10 @@ function TranslatorPage() {
       setRecording(false)
 
       // Play the audio automatically
-      const audio = new Audio(data.filePath)
-      audio.play()
+      if (data.audio) {
+        const audio = new Audio(data.audio)
+        audio.play()
+      }
     }
 
     recognition.onerror = () => {
