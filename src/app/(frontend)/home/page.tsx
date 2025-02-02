@@ -189,7 +189,7 @@ function HomePage() {
             <h1 className="lg:text-[12rem] text-[6rem] font-bold text-primary">Aonik</h1>
             <p className="text-2xl">Graduation Project Presentation | Team 1</p>
           </div>
-          <div className="flex justify-center items-center gap-5 mt-10">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-5 mt-10">
             <div className="flex justify-center">
               <Link
                 href="/appointment"
