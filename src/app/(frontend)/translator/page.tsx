@@ -12,9 +12,6 @@ interface ConversationType {
 }
 
 function TranslatorPage() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-  const recognition = new SpeechRecognition()
-
   const chatboxRef = useRef<any>(null)
   const [firstLanguage, setFirstLanguage] = useState('English')
   const [secondLanguage, setSecondLanguage] = useState('Arabic')
@@ -145,6 +142,10 @@ function TranslatorPage() {
       alert('Speech recognition is not supported in this browser.')
       return
     }
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+    const recognition = new SpeechRecognition()
+
     if (isActive) {
       recognition.stop()
       setWaitForEnd(true)
@@ -237,9 +238,9 @@ function TranslatorPage() {
         ref={chatboxRef}
         className="overflow-y-auto h-[30vh] border rounded-3xl scroll-smooth p-5 my-10 scrollbar"
       >
-        <div className="">
+        <div className="flex flex-col gap-5">
           {conversation?.map((c, index) => (
-            <div key={index}>
+            <div key={index} className="flex flex-col gap-5">
               <div className={`text-left`}>
                 <div className="flex">
                   <div className="bg-primary flex items-center gap-2 text-lg rounded-3xl rounded-tl-none text-white py-3 px-4">
@@ -248,9 +249,9 @@ function TranslatorPage() {
                   </div>
                 </div>
               </div>
-              <div className={`text-right}`}>
+              <div className={`text-right`}>
                 <div className="flex justify-end">
-                  <div className="bg-primary min-w-40 flex items-center gap-2 text-lg rounded-3xl rounded-tr-none text-white py-3 px-4">
+                  <div className="bg-primary-foreground min-w-40 flex items-center gap-2 text-lg rounded-3xl rounded-tr-none text-white py-3 px-4">
                     <IoVolumeHigh className="text-lg rotate-180" />
                     <span>{c.conversationSecondText}</span>
                   </div>
@@ -273,15 +274,17 @@ function TranslatorPage() {
           <span className="bg-red-600 p-2 rounded-xl text-white text-lg">Recording Off </span>
         )}
       </div>
-      <TranslatorButton
-        waitForEnd={waitForEnd}
-        isActive={isActive}
-        startRecording={startRecording}
-        firstLanguage={firstLanguage}
-        secondLanguage={secondLanguage}
-        activeBtn={activeBtn}
-        setActiveBtn={setActiveBtn}
-      />
+      <div className="my-15">
+        <TranslatorButton
+          waitForEnd={waitForEnd}
+          isActive={isActive}
+          startRecording={startRecording}
+          firstLanguage={firstLanguage}
+          secondLanguage={secondLanguage}
+          activeBtn={activeBtn}
+          setActiveBtn={setActiveBtn}
+        />
+      </div>
     </section>
   )
 }

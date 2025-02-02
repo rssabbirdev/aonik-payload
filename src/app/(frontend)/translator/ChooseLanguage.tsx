@@ -17,11 +17,11 @@ function ChooseLanguage({
     <div className="flex justify-between items-center">
       <div>
         <div className="flex items-center gap-3 -mt-3">
-          <h3 className="text-3xl text-primary">Choose your language :</h3>
+          <h3 className="md:text-3xl text-lg text-primary">Choose language:</h3>
           <IoVolumeHigh className="-mt-4 text-lg" />
         </div>
         <div>
-          <label htmlFor="HeadlineAct" className="block">
+          <label htmlFor="HeadlineAct" className="block text-sm md:text-base">
             {' '}
             Person One{' '}
           </label>
@@ -51,10 +51,10 @@ function ChooseLanguage({
       <div className="text-right">
         <div className="flex items-center gap-3 -mt-3">
           <IoVolumeHigh className="-mt-4 text-lg rotate-180" />
-          <h3 className="text-3xl text-primary">:اختر لغتك</h3>
+          <h3 className="md:text-3xl text-lg text-primary">:اختر لغتك</h3>
         </div>
         <div>
-          <label htmlFor="HeadlineAct" className="block">
+          <label htmlFor="HeadlineAct" className="block text-sm md:text-base">
             {' '}
             Person Two{' '}
           </label>
