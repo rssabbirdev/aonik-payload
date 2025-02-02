@@ -221,7 +221,7 @@ export const Posts: CollectionConfig<'posts'> = {
   ],
   hooks: {
     afterChange: [revalidatePost],
-    // afterRead: [populateAuthors],
+    afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
   },
   versions: {
