@@ -5,9 +5,12 @@ import React from 'react'
 import type { Header as HeaderType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
-import { SearchIcon } from 'lucide-react'
+// import { SearchIcon } from 'lucide-react'
 
-export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
+export const HeaderNav: React.FC<{ data: HeaderType; setIsNavOpen: (agr: boolean) => void }> = ({
+  data,
+  setIsNavOpen,
+}) => {
   const navItems = data?.navItems || []
 
   return (
@@ -15,7 +18,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       <ul className="flex flex-col md:flex-row gap-6 text-sm">
         {navItems.map(({ link }, i) => {
           return (
-            <li key={i}>
+            <li onClick={() => setIsNavOpen(false)} key={i}>
               <CMSLink {...link} appearance="aonik" />
             </li>
           )

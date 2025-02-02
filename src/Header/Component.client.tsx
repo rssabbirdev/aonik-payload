@@ -15,7 +15,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
-  const [isNavOpen, setIsNavOpen] = useState(false)
+  const [isNavOpen, setIsNavOpen] = useState<boolean>(false)
 
   useEffect(() => {
     setHeaderTheme(null)
@@ -32,7 +32,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex md:h-16 items-center md:justify-center justify-end">
           <div className="md:block hidden">
-            <HeaderNav data={data} />
+            <HeaderNav setIsNavOpen={setIsNavOpen} data={data} />
           </div>
           <div
             className={`transition-all absolute z-10 mt-0.5 top-0 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg md:hidden block ${isNavOpen ? 'left-0 opacity-100' : '-left-64 opacity-0'}`}
@@ -47,7 +47,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               </button>
             </div>
             <div className="p-2">
-              <HeaderNav data={data} />
+              <HeaderNav setIsNavOpen={setIsNavOpen} data={data} />
             </div>
           </div>
         </div>
