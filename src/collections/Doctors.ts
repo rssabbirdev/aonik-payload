@@ -32,5 +32,4 @@ export const Doctors: CollectionConfig = {
       required: true,
     },
   ],
-  timestamps: true,
 }
