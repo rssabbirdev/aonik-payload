@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IoVolumeHigh } from 'react-icons/io5'
 import TranslatorButton from './TranslatorButton'
 import ChooseLanguage from './ChooseLanguage'
+import { getSelectedLangCode } from './getSelectedLangCode'
 
 interface ConversationType {
   conversationFirstText: string
@@ -11,15 +12,20 @@ interface ConversationType {
 }
 
 function TranslatorPage() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+  const recognition = new SpeechRecognition()
+
   const chatboxRef = useRef<any>(null)
-  const [firstLanguage, setFirstLanguage] = useState('en-US')
-  const [secondLanguage, setSecondLanguage] = useState('ar-SA')
+  const [firstLanguage, setFirstLanguage] = useState('English')
+  const [secondLanguage, setSecondLanguage] = useState('Arabic')
   const [recording, setRecording] = useState(false)
-  const [conversation, setConvertation] = useState<ConversationType[]>()
+  const [conversation, setConversation] = useState<ConversationType[]>()
 
   const [activeBtn, setActiveBtn] = useState<number>(0)
 
   const [isActive, setIsActive] = useState<boolean>(false)
+  const [waitForEnd, setWaitForEnd] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   // const handleSpeak = async (d: string) => {
   //   setIsLoading(true)
@@ -139,25 +145,32 @@ function TranslatorPage() {
       alert('Speech recognition is not supported in this browser.')
       return
     }
-
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-    const recognition = new SpeechRecognition()
     if (isActive) {
       recognition.stop()
-      setIsActive(false)
+      setWaitForEnd(true)
+
+      recognition.onend = function () {
+        setIsActive(false)
+        setRecording(false)
+        setWaitForEnd(false)
+      }
       return
     }
-    recognition.lang = sourceLang === 'English' ? 'en-US' : 'ar-SA'
+
+    recognition.lang = getSelectedLangCode(sourceLang)
     recognition.onstart = function () {
       setIsActive(true)
     }
 
     recognition.onend = function () {
       setIsActive(false)
+      setWaitForEnd(false)
+      setRecording(false)
     }
     setRecording(true)
 
     recognition.onresult = async (event: any) => {
+      setIsLoading(true)
       const text = event.results[0][0].transcript
       setRecording(true)
 
@@ -169,9 +182,8 @@ function TranslatorPage() {
       })
 
       const data = await response.json()
-      console.log('check error from client', data)
-      if (sourceLang === 'English') {
-        setConvertation([
+      if (sourceLang === firstLanguage) {
+        setConversation([
           ...(conversation ?? []),
           {
             conversationFirstText: text,
@@ -180,7 +192,7 @@ function TranslatorPage() {
           },
         ])
       } else {
-        setConvertation([
+        setConversation([
           ...(conversation ?? []),
           {
             conversationFirstText: data?.translatedText,
@@ -189,6 +201,7 @@ function TranslatorPage() {
           },
         ])
       }
+      setIsLoading(false)
       setRecording(false)
 
       // Play the audio automatically
@@ -206,8 +219,6 @@ function TranslatorPage() {
     recognition.start()
   }
 
-  console.log(conversation)
-
   useEffect(() => {
     if (chatboxRef.current) {
       chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight
@@ -222,7 +233,10 @@ function TranslatorPage() {
         setFirstLanguage={setFirstLanguage}
         setSecondLanguage={setSecondLanguage}
       />
-      <div ref={chatboxRef} className="overflow-y-scroll h-[30vh] border-4 p-5 my-10">
+      <div
+        ref={chatboxRef}
+        className="overflow-y-auto h-[30vh] border rounded-3xl scroll-smooth p-5 my-10 scrollbar"
+      >
         <div className="">
           {conversation?.map((c, index) => (
             <div key={index}>
@@ -244,23 +258,23 @@ function TranslatorPage() {
               </div>
             </div>
           ))}
-          {/* <div className="text-right">
-            <div className="flex justify-end">
-              <div className="bg-primary min-w-40 flex items-center gap-2 text-lg rounded-3xl rounded-tr-none text-white py-3 px-4">
-                <IoVolumeHigh className="text-lg rotate-180" />
-                <span>{translatedText}</span>
-                {recording && <p>Listening...</p>}
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
-      {recording ? (
-        <span className="bg-primary p-2 rounded-xl text-white text-lg">Listening...</span>
-      ) : (
-        <span className="bg-primary p-2 rounded-xl text-white text-lg">Recording Off </span>
-      )}
+      <div className="flex justify-between h-10 -mt-10 px-4">
+        {isLoading && <p className="">Translation Processing...</p>}
+        {isLoading && <p className="">...جاري معالجة الترجمة</p>}
+      </div>
+      <div>
+        {recording ? (
+          <span className="bg-primary p-2 rounded-xl text-white text-lg">
+            {waitForEnd ? 'Still Listening...' : 'Listening...'}
+          </span>
+        ) : (
+          <span className="bg-red-600 p-2 rounded-xl text-white text-lg">Recording Off </span>
+        )}
+      </div>
       <TranslatorButton
+        waitForEnd={waitForEnd}
         isActive={isActive}
         startRecording={startRecording}
         firstLanguage={firstLanguage}

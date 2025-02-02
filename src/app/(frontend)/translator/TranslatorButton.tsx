@@ -8,6 +8,7 @@ function TranslatorButton({
   isActive,
   activeBtn,
   setActiveBtn,
+  waitForEnd,
 }: {
   startRecording: (sourceLang: string, targetLang: string) => void
   firstLanguage: string
@@ -15,35 +16,46 @@ function TranslatorButton({
   isActive: boolean
   activeBtn: number
   setActiveBtn: (num: number) => void
+  waitForEnd: boolean
 }) {
   return (
     <div className="flex gap-20 items-center justify-center mt-10">
       <div className="flex flex-col justify-center items-center gap-3">
         <button
+          disabled={waitForEnd}
           onClick={() => {
             setActiveBtn(0)
-            startRecording('English', 'Arabic')
+            startRecording(firstLanguage, secondLanguage)
           }}
           className={`p-6 text-4xl font-bold transition-all rounded-full border text-white cursor-pointer ${activeBtn === 0 && isActive ? 'bg-red-500 border-red-500' : 'bg-primary border-primary'}`}
         >
           {activeBtn === 0 && isActive ? <FaMicrophoneAltSlash /> : <FaMicrophoneAlt />}
         </button>
         <p className="font-serif text-sm">
-          {activeBtn === 0 && isActive ? 'Listening....' : 'Say Person One'}
+          {waitForEnd && activeBtn === 0
+            ? 'Wait Stopping...'
+            : activeBtn === 0 && isActive
+              ? 'Listening....'
+              : `Say ${firstLanguage}`}
         </p>
       </div>
       <div className="flex flex-col justify-center items-center gap-3">
         <button
+          disabled={waitForEnd}
           onClick={() => {
             setActiveBtn(1)
-            startRecording('Arabic', 'English')
+            startRecording(secondLanguage, firstLanguage)
           }}
           className={`p-6 text-4xl font-bold transition-all rounded-full border text-white cursor-pointer ${activeBtn === 1 && isActive ? 'bg-red-500 border-red-500' : 'bg-primary border-primary'}`}
         >
           {activeBtn === 1 && isActive ? <FaMicrophoneAltSlash /> : <FaMicrophoneAlt />}
         </button>
         <p className="font-serif text-sm">
-          {activeBtn === 1 && isActive ? 'Listening....' : 'Say Person Two'}
+          {waitForEnd && activeBtn === 1
+            ? 'Wait Stopping...'
+            : activeBtn === 1 && isActive
+              ? 'Listening....'
+              : `Say ${secondLanguage}`}
         </p>
       </div>
     </div>

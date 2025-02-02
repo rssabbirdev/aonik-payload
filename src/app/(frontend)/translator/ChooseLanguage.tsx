@@ -35,15 +35,15 @@ function ChooseLanguage({
           >
             <option value="">Please select</option>
             <optgroup label="United State of America">
-              <option value="en-US">English</option>
+              <option value="English">English</option>
             </optgroup>
 
             <optgroup label="Bangladesh">
-              <option value="bn-BD">Bangla</option>
+              <option value="Bangla">Bangla</option>
             </optgroup>
 
             <optgroup label="India">
-              <option value="hi-IN">Hindi</option>
+              <option value="Hindi">Hindi</option>
             </optgroup>
           </select>
         </div>
@@ -68,7 +68,7 @@ function ChooseLanguage({
           >
             <option value="">Please select</option>
             <optgroup label="United Arab Emirates">
-              <option value="ar-SR">Arabic</option>
+              <option value="Arabic">Arabic</option>
             </optgroup>
           </select>
         </div>

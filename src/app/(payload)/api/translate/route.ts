@@ -40,6 +40,7 @@ import OpenAI from 'openai'
 import { TextToSpeechClient } from '@google-cloud/text-to-speech'
 import util from 'util'
 import fs from 'fs'
+import { getSelectedLangCode } from '@/app/(frontend)/translator/getSelectedLangCode'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // Set in .env.local
@@ -88,7 +89,7 @@ export async function POST(req: NextRequest) {
     // })
     const [response] = await client.synthesizeSpeech({
       input: { text: translatedText },
-      voice: { languageCode: targetLang === 'English' ? 'en-US' : 'ar-XA', ssmlGender: 'NEUTRAL' },
+      voice: { languageCode: getSelectedLangCode(targetLang), ssmlGender: 'NEUTRAL' },
       audioConfig: { audioEncoding: 'MP3' },
     })
     // Convert buffer to base64 properly
