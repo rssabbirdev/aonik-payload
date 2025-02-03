@@ -3,7 +3,7 @@ export const getSelectedLangCode = (langName: string) => {
     case 'english':
       return 'en-US'
     case 'arabic':
-      return 'ar-SA'
+      return 'ar-AE'
     case 'hindi':
       return 'hi-IN'
     case 'bangla':
