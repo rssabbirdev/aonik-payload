@@ -236,7 +236,7 @@ function TranslatorPage() {
       />
       <div
         ref={chatboxRef}
-        className="overflow-y-auto h-[30vh] border rounded-3xl scroll-smooth p-5 my-10 scrollbar"
+        className="overflow-y-auto h-[30vh] border rounded-l-lg rounded-r-lg scroll-smooth p-5 my-10 scrollbar"
       >
         <div className="flex flex-col gap-5">
           {conversation?.map((c, index) => (
@@ -262,10 +262,10 @@ function TranslatorPage() {
         </div>
       </div>
       <div className="flex justify-between h-10 -mt-10 px-4">
-        {isLoading && <p className="">Translation Processing...</p>}
-        {isLoading && <p className="">...جاري معالجة الترجمة</p>}
+        {isLoading && <p className="text-xs md:text-base">Translation Processing...</p>}
+        {isLoading && <p className="text-xs md:text-base">...جاري معالجة الترجمة</p>}
       </div>
-      <div>
+      <div className="text-center sm:text-left">
         {recording ? (
           <span className="bg-primary p-2 rounded-xl text-white text-lg">
             {waitForEnd ? 'Still Listening...' : 'Listening...'}

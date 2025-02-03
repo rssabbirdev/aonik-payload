@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
     // })
     const [response] = await client.synthesizeSpeech({
       input: { text: translatedText },
-      voice: { languageCode: getSelectedLangCode(targetLang), ssmlGender: 'NEUTRAL' },
+      voice: { languageCode: getSelectedLangCode(targetLang), ssmlGender: 'MALE' },
       audioConfig: { audioEncoding: 'MP3' },
     })
     // Convert buffer to base64 properly

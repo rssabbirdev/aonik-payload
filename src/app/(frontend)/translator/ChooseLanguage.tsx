@@ -33,17 +33,11 @@ function ChooseLanguage({
             id="HeadlineAct"
             className="mt-1.5 p-3 border border-primary-foreground text-primary-foreground rounded-lg font-serif"
           >
-            <optgroup label="United State of America">
-              <option value="English">English</option>
-            </optgroup>
-
-            <optgroup label="Bangladesh">
-              <option value="Bangla">Bangla</option>
-            </optgroup>
-
-            <optgroup label="India">
-              <option value="Hindi">Hindi</option>
-            </optgroup>
+            <option value="English">English</option>
+            <option value="Bangla">Bangla</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
           </select>
         </div>
       </div>

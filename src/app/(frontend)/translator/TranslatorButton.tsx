@@ -19,7 +19,7 @@ function TranslatorButton({
   waitForEnd: boolean
 }) {
   return (
-    <div className="flex gap-20 items-center justify-center mt-10">
+    <div className="flex gap-20 items-center justify-center my-16">
       <div className="flex flex-col justify-center items-center gap-3">
         <button
           disabled={waitForEnd}

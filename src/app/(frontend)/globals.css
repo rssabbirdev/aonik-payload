@@ -114,12 +114,12 @@ html[data-theme='light'] {
   }
 
   .scrollbar::-webkit-scrollbar-thumb {
-    background: #e0cbcb;
+    background: #89a27140;
     border-radius: 100vh;
     border: 3px solid #f6f7ed;
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #c0a0b9;
+    background: #89a2718f;
   }
 }
