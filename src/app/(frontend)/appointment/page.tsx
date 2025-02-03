@@ -1,10 +1,11 @@
 'use client'
 import React, { useState } from 'react'
-import { IoLocationSharp, IoVolumeHigh } from 'react-icons/io5'
+import { IoLocationSharp } from 'react-icons/io5'
 import { LuIdCard } from 'react-icons/lu'
 import { FaUserDoctor } from 'react-icons/fa6'
 import Link from 'next/link'
 import { Appointment } from '@/payload-types'
+import AccessibleText from '@/components/AccessibleText/AccessibleText'
 
 function AppointmentPage() {
   const [eid, setEid] = useState('')
@@ -44,15 +45,16 @@ function AppointmentPage() {
           <h3 className="mb-3 text-primary">Enter your Emirates ID number:</h3>
           <div className="flex items-center gap-3">
             <LuIdCard className="text-5xl text-primary" />
-            <input
-              onChange={(e) => setEid(e.target.value)}
-              className="bg-primary text-white text-xl font-bold border-none outline-none rounded-full py-3 px-2 placeholder:text-white font-serif [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-              type="text"
-              placeholder="784-####-######-#"
-              maxLength={14}
-              minLength={14}
-            />
-            <IoVolumeHigh className="-mt-4 text-lg" />
+            <AccessibleText text="Enter your emirates ID number here in this box">
+              <input
+                onChange={(e) => setEid(e.target.value)}
+                className="bg-primary text-white text-xl font-bold border-none outline-none rounded-full py-3 px-2 placeholder:text-white font-serif [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                type="text"
+                placeholder="784-####-######-#"
+                maxLength={14}
+                minLength={14}
+              />
+            </AccessibleText>
           </div>
           <button
             disabled={eid?.length !== 14 || isLoading}
@@ -67,19 +69,28 @@ function AppointmentPage() {
         <section className="mt-10 container flex flex-col justify-center items-center">
           <div className="flex flex-col justify-center items-center">
             <div className="flex items-center gap-3 -mt-3">
-              <h3 className="text-3xl text-primary">Your doctor name is :</h3>
-              <IoVolumeHigh className="-mt-4 text-lg" />
+              <AccessibleText
+                /*@ts-expect-error depth related error*/
+                text={`Your Doctor name is ${appointment.appointmentWith?.doctorName}`}
+              >
+                <h3 className="text-3xl text-primary">Your doctor name is :</h3>
+              </AccessibleText>
             </div>
             <FaUserDoctor className="text-7xl" />
             {/*@ts-expect-error depth related error*/}
             <h2 className="text-lg text-primary">{appointment.appointmentWith?.doctorName}</h2>
 
-            <h3 className="text-xl text-primary">
-              Please proceed to room number {/*@ts-expect-error depth related error*/}
-              <span className="font-bold">{appointment.appointmentWith.room}</span>, your serial
-              number
-              <span className="font-bold"> {appointment.serialNumber}</span>
-            </h3>
+            <AccessibleText
+              /*@ts-expect-error depth related error*/
+              text={`Please proceed to room number ${appointment.appointmentWith?.room}, your serial number is ${appointment.serialNumber}`}
+            >
+              <h3 className="text-xl text-primary">
+                Please proceed to room number {/*@ts-expect-error depth related error*/}
+                <span className="font-bold">{appointment.appointmentWith.room}</span>, your serial
+                number
+                <span className="font-bold"> {appointment.serialNumber}</span>
+              </h3>
+            </AccessibleText>
           </div>
           <Link
             href="/navigation"

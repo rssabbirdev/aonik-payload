@@ -1,9 +1,9 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { IoVolumeHigh } from 'react-icons/io5'
 import TranslatorButton from './TranslatorButton'
 import ChooseLanguage from './ChooseLanguage'
 import { getSelectedLangCode } from './getSelectedLangCode'
+import AccessibleText from '@/components/AccessibleText/AccessibleText'
 
 interface ConversationType {
   conversationFirstText: string
@@ -244,16 +244,25 @@ function TranslatorPage() {
               <div className={`text-left`}>
                 <div className="flex">
                   <div className="bg-primary flex items-center gap-2 text-lg rounded-3xl rounded-tl-none text-white py-3 px-4">
-                    <span>{c.conversationFirstText}</span>
-                    <IoVolumeHigh className={`text-lg`} />
+                    <AccessibleText
+                      text={c.conversationFirstText}
+                      lang={getSelectedLangCode(firstLanguage)}
+                    >
+                      <span>{c.conversationFirstText}</span>
+                    </AccessibleText>
                   </div>
                 </div>
               </div>
               <div className={`text-right`}>
                 <div className="flex justify-end">
                   <div className="bg-primary-foreground min-w-40 flex items-center gap-2 text-lg rounded-3xl rounded-tr-none text-white py-3 px-4">
-                    <IoVolumeHigh className="text-lg rotate-180" />
-                    <span>{c.conversationSecondText}</span>
+                    <AccessibleText
+                      text={c.conversationSecondText}
+                      lang={getSelectedLangCode(secondLanguage)}
+                      buttonPosition="left"
+                    >
+                      <span>{c.conversationSecondText}</span>
+                    </AccessibleText>
                   </div>
                 </div>
               </div>

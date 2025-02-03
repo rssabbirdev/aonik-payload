@@ -1,6 +1,6 @@
 'use client'
+import AccessibleText from '@/components/AccessibleText/AccessibleText'
 import React, { Dispatch, SetStateAction } from 'react'
-import { IoVolumeHigh } from 'react-icons/io5'
 
 function ChooseLanguage({
   firstLanguage,
@@ -17,8 +17,9 @@ function ChooseLanguage({
     <div className="flex justify-between items-center">
       <div>
         <div className="flex items-center gap-3 -mt-3">
-          <h3 className="md:text-3xl text-lg text-primary">Choose language:</h3>
-          <IoVolumeHigh className="-mt-4 text-lg" />
+          <AccessibleText text="choose language">
+            <h3 className="md:text-3xl text-lg text-primary">Choose language:</h3>
+          </AccessibleText>
         </div>
         <div>
           <label htmlFor="HeadlineAct" className="block text-sm md:text-base">
@@ -43,8 +44,9 @@ function ChooseLanguage({
       </div>
       <div className="text-right">
         <div className="flex items-center gap-3 -mt-3">
-          <IoVolumeHigh className="-mt-4 text-lg rotate-180" />
-          <h3 className="md:text-3xl text-lg text-primary">:اختر لغتك</h3>
+          <AccessibleText text="اختر لغتك" lang="ar-SA" buttonPosition="left">
+            <h3 className="md:text-3xl text-lg text-primary">:اختر لغتك</h3>
+          </AccessibleText>
         </div>
         <div>
           <label htmlFor="HeadlineAct" className="block text-sm md:text-base">

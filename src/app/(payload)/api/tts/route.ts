@@ -1,60 +1,35 @@
-import fs from 'fs'
-import util from 'util'
-import path from 'path'
-import { NextRequest } from 'next/server'
-import OpenAI from 'openai'
+import { NextRequest, NextResponse } from 'next/server'
+import { TextToSpeechClient } from '@google-cloud/text-to-speech'
 
-// Define the POST method for handling text-to-speech conversion
-export async function POST(req: NextRequest): Promise<Response> {
-  const timestamp = Date.now()
+const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || '{}')
+
+const client = new TextToSpeechClient({ credentials })
+
+export async function POST(req: NextRequest) {
+  if (req.method !== 'POST') return NextResponse.json({ message: 'Method Not Allowed' })
+
+  const { text, lang } = await req.json()
+
   try {
-    const body = (await req.json()) as { text: string; lang: string }
-    const { text } = body
-
-    console.log(body)
-
-    if (!text) {
-      return new Response(JSON.stringify({ error: 'Text is required' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      })
-    }
-
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+    const [response] = await client.synthesizeSpeech({
+      input: { text: text },
+      voice: { languageCode: lang, ssmlGender: 'MALE' },
+      audioConfig: { audioEncoding: 'MP3' },
     })
-    // const speechFile = path.resolve('./output.mp3')
-    const speechFile = path.join(process.cwd(), 'public', `/output.mp3`)
-    const removeFile = util.promisify(fs.rm) // `fs.rm()` is better for deleting
-
-    const mp3 = await openai.audio.speech.create({
-      model: 'tts-1',
-      voice: 'alloy',
-      input: text,
-    })
-
-    const buffer = Buffer.from(await mp3.arrayBuffer())
-    // Delete the previous file safely
-    try {
-      await removeFile(speechFile, { force: true }) // `force: true` ensures it won't fail if the file is missing
-    } catch (error) {
-      console.error('Error deleting previous file:', error)
-    }
-
-    await fs.promises.writeFile(speechFile, buffer)
-
-    return new Response(
-      JSON.stringify({ message: 'Audio generated', filePath: `/output.mp3?t=${timestamp}` }),
+    // Convert buffer to base64 properly
+    const audioBase64 = Buffer.from(response.audioContent as Uint8Array).toString('base64')
+    return new NextResponse(
+      JSON.stringify({
+        audio: `data:audio/mpeg;base64,${audioBase64}`,
+      }),
       {
         status: 200,
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
     )
   } catch (error) {
-    console.error('Error during TTS request:', error)
-    return new Response(JSON.stringify({ error: 'Error generating speech' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    return NextResponse.json({ message: 'Error processing request', error })
   }
 }
