@@ -23,6 +23,7 @@ function TranslatorPage() {
   const [isActive, setIsActive] = useState<boolean>(false)
   const [waitForEnd, setWaitForEnd] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isGrammarCheck, setIsGrammarCheck] = useState<boolean>(false)
 
   // const handleSpeak = async (d: string) => {
   //   setIsLoading(true)
@@ -179,7 +180,7 @@ function TranslatorPage() {
       const response = await fetch('/api/translate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, sourceLang, targetLang }),
+        body: JSON.stringify({ text, sourceLang, targetLang, isGrammarCheck }),
       })
 
       const data = await response.json()
@@ -187,7 +188,7 @@ function TranslatorPage() {
         setConversation([
           ...(conversation ?? []),
           {
-            conversationFirstText: text,
+            conversationFirstText: data?.text,
             conversationSecondText: data?.translatedText,
             conversationLanguage: sourceLang,
           },
@@ -197,7 +198,7 @@ function TranslatorPage() {
           ...(conversation ?? []),
           {
             conversationFirstText: data?.translatedText,
-            conversationSecondText: text,
+            conversationSecondText: data?.text,
             conversationLanguage: sourceLang,
           },
         ])
@@ -274,14 +275,24 @@ function TranslatorPage() {
         {isLoading && <p className="text-xs md:text-base">Translation Processing...</p>}
         {isLoading && <p className="text-xs md:text-base">...جاري معالجة الترجمة</p>}
       </div>
-      <div className="text-center sm:text-left">
-        {recording ? (
-          <span className="bg-primary p-2 rounded-xl text-white text-lg">
-            {waitForEnd ? 'Still Listening...' : 'Listening...'}
-          </span>
-        ) : (
-          <span className="bg-red-600 p-2 rounded-xl text-white text-lg">Recording Off </span>
-        )}
+      <div className="flex justify-between mt-3 items-center text-sm md:text-base">
+        <div>
+          {recording ? (
+            <span className="bg-primary p-2 rounded-xl text-white">
+              {waitForEnd ? 'Still Listening...' : 'Listening...'}
+            </span>
+          ) : (
+            <span className="bg-red-600 p-2 rounded-xl text-white">Recording Off </span>
+          )}
+        </div>
+        <div>
+          <button
+            onClick={() => setIsGrammarCheck((g) => !g)}
+            className={`${isGrammarCheck ? 'bg-primary' : 'bg-red-600'} cursor-pointer p-2 rounded-xl text-white`}
+          >
+            Fix Grammar {isGrammarCheck ? 'On' : 'Off'}
+          </button>
+        </div>
       </div>
       <div className="my-15">
         <TranslatorButton
