@@ -18,6 +18,7 @@ export interface Config {
     users: User;
     doctors: Doctor;
     appointments: Appointment;
+    videos: Video;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -36,6 +37,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     doctors: DoctorsSelect<false> | DoctorsSelect<true>;
     appointments: AppointmentsSelect<false> | AppointmentsSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -701,6 +703,20 @@ export interface Appointment {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: string;
+  title: string;
+  description: string;
+  author: string;
+  videoLink: string;
+  thumbnail: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -898,6 +914,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'appointments';
         value: string | Appointment;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: string | Video;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1276,6 +1296,19 @@ export interface AppointmentsSelect<T extends boolean = true> {
   appointmentWith?: T;
   emiratesId?: T;
   serialNumber?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  author?: T;
+  videoLink?: T;
+  thumbnail?: T;
   updatedAt?: T;
   createdAt?: T;
 }
