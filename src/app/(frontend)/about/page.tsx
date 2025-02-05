@@ -1,4 +1,4 @@
-import ComingSoon from '@/components/ComingSoon/ComingSoon'
+import Link from 'next/link'
 import React from 'react'
 
 function page() {
@@ -6,24 +6,24 @@ function page() {
     {
       avatar:
         'https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
-      name: 'Martiana dialan',
-      title: 'Product designer',
+      name: 'Dr. Sara Ruth',
+      title: 'Neurologist',
       desc: 'Lorem Ipsum is simply dummy text of the printing and typesettin industry.',
       linkedin: 'javascript:void(0)',
       twitter: 'javascript:void(0)',
     },
     {
       avatar: 'https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg',
-      name: 'Micheal colorand',
-      title: 'Software engineer',
+      name: 'Dr. Micheal Adam',
+      title: 'Cardiologist',
       desc: 'Lorem Ipsum is simply dummy text of the printing and typesettin industry.',
       linkedin: 'javascript:void(0)',
       twitter: 'javascript:void(0)',
     },
     {
       avatar: 'https://randomuser.me/api/portraits/women/79.jpg',
-      name: 'Brown Luis',
-      title: 'Full stack engineer',
+      name: 'Dr. Brown Luis',
+      title: 'General',
       desc: 'Lorem Ipsum is simply dummy text of the printing and typesettin industry.',
       linkedin: 'javascript:void(0)',
       twitter: 'javascript:void(0)',
@@ -31,31 +31,26 @@ function page() {
   ]
   return (
     <main>
-      <section className="relative overflow-hidden py-28 px-4 bg-gray-900 md:px-8">
+      <section className="relative overflow-hidden py-28 px-4 md:px-8">
         <div className="w-full h-full rounded-full bg-gradient-to-r from-[#58AEF1] to-pink-500 absolute -top-12 -right-14 blur-2xl opacity-10"></div>
         <div className="max-w-xl mx-auto text-center relative">
           <div className="py-4">
-            <h3 className="text-3xl text-gray-200 font-semibold md:text-4xl">
-              Get Unlimited Access To All Templates
+            <h3 className="text-3xl text-primary  font-semibold md:text-4xl">
+              _Lets Communication Easier _Though Translator
             </h3>
-            <p className="text-gray-300 leading-relaxed mt-3">
-              Nam erat risus, sodales sit amet lobortis ut, finibus eget metus. Cras aliquam ante ut
-              tortor posuere feugiat. Duis sodales nisi id porta lacinia.
+            <p className=" leading-relaxed mt-3">
+              We develop most suitable translator to make our doctor-patient communication easier.
+              With AI grammar correction feature no matter how you say, the translation will smooth
+              then ever
             </p>
           </div>
           <div className="mt-5 items-center justify-center gap-3 sm:flex">
-            <a
-              href="javascript:void()"
-              className="block w-full mt-2 py-2.5 px-8 text-gray-700 bg-white rounded-md duration-150 hover:bg-gray-100 sm:w-auto"
+            <Link
+              href="/translator"
+              className="md:px-10 md:py-4 md:text-lg px-5 py-3 text-sm font-bold bg-primary transition-all text-white rounded-md hover:bg-primary-foreground border border-primary"
             >
               Try It Out
-            </a>
-            <a
-              href="javascript:void()"
-              className="block w-full mt-2 py-2.5 px-8 text-gray-300 bg-gray-700 rounded-md duration-150 hover:bg-gray-800 sm:w-auto"
-            >
-              Get Started
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -65,15 +60,15 @@ function page() {
           <div className="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
             <div className="flex-1 sm:hidden lg:block">
               <img
-                src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+                src="https://health.ucdavis.edu/media-resources/family-medicine/images/Images/Main%20Images/How-Are-Clinic-Works.jpg"
                 className="md:max-w-lg sm:rounded-lg"
                 alt=""
               />
             </div>
             <div className="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
-              <h3 className="text-indigo-600 font-semibold">Professional services</h3>
-              <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-                Build your SaaS solution with help from our experts
+              <h3 className="text-primary-foreground font-semibold">Advanced Technology</h3>
+              <p className="text-primary text-3xl font-semibold sm:text-4xl">
+                With modern medical tools, noting hide inside you.
               </p>
               <p className="mt-3 text-gray-600">
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
@@ -83,7 +78,7 @@ function page() {
               </p>
               <a
                 href="javascript:void(0)"
-                className="inline-flex gap-x-1 items-center text-indigo-600 hover:text-indigo-500 duration-150 font-medium"
+                className="inline-flex gap-x-1 items-center text-primary-foreground hover:text-indigo-500 duration-150 font-medium"
               >
                 Learn more
                 <svg
@@ -107,7 +102,7 @@ function page() {
       <section className="py-14">
         <div className="max-w-screen-xl mx-auto px-4 text-center md:px-8">
           <div className="max-w-xl mx-auto">
-            <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">Meet our team</h3>
+            <h3 className="text-primary text-3xl font-semibold sm:text-4xl">Meet Our Doctors</h3>
             <p className="text-gray-600 mt-3">
               Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum
               has been the industrys standard dummy.
@@ -122,7 +117,7 @@ function page() {
                   </div>
                   <div className="mt-2">
                     <h4 className="text-gray-700 font-semibold sm:text-lg">{item.name}</h4>
-                    <p className="text-indigo-600">{item.title}</p>
+                    <p className="text-primary">{item.title}</p>
                     <p className="text-gray-600 mt-2">{item.desc}</p>
                     <div className="mt-4 flex justify-center gap-4 text-gray-400">
                       <a href={item.twitter}>

@@ -20,6 +20,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false)
+  const [pathnameStatus, setPathnameStatus] = useState<boolean>(true)
 
   useEffect(() => {
     setHeaderTheme(null)
@@ -28,8 +29,15 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   useEffect(() => {
     if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerTheme])
+
+    if (pathname === '/appointment') {
+      setPathnameStatus(false)
+    } else if (pathname === '/translator') {
+      setPathnameStatus(false)
+    } else {
+      setPathnameStatus(true)
+    }
+  }, [headerTheme, pathname, theme])
   if (pathname === '/home') {
     return redirect('/')
   }
@@ -43,7 +51,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   }
   return (
     <header className="container relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
-      {pathname === '/' && (
+      {pathnameStatus ? (
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex md:h-16 items-center md:justify-center justify-end">
             <div className="md:block hidden">
@@ -85,8 +93,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             </button>
           </div>
         </div>
-      )}
-      {pathname !== '/' && (
+      ) : (
         <div>
           <nav className="bg-white w-full">
             <div className="items-center max-w-screen-xl mx-auto flex justify-between">

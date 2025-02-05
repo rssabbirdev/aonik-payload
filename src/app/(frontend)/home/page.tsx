@@ -137,8 +137,8 @@ function HomePage() {
           />
         </svg>
       ),
-      contact: 'Mountain View, California, United State.',
-      title: 'Our office',
+      contact: 'Fujairah,  United Arab Emirates.',
+      title: 'Our Clinic',
     },
     {
       icon: (
@@ -157,7 +157,7 @@ function HomePage() {
           />
         </svg>
       ),
-      contact: '+1 (555) 000-000',
+      contact: '050 000 0000',
       title: 'Phone',
     },
     {
@@ -177,7 +177,7 @@ function HomePage() {
           />
         </svg>
       ),
-      contact: 'Support@example.com',
+      contact: 'support@aonik.com',
       title: 'Email',
     },
   ]
