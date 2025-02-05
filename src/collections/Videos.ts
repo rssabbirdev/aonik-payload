@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../access/authenticated'
 import { anyone } from '@/access/anyone'
+import { slugField } from '@/fields/slug'
 
 export const Videos: CollectionConfig = {
   slug: 'videos',
@@ -45,5 +46,6 @@ export const Videos: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    ...slugField(),
   ],
 }

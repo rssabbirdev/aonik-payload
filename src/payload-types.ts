@@ -712,6 +712,8 @@ export interface Video {
   author: string;
   videoLink: string;
   thumbnail: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1309,6 +1311,8 @@ export interface VideosSelect<T extends boolean = true> {
   author?: T;
   videoLink?: T;
   thumbnail?: T;
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }

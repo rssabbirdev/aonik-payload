@@ -25,7 +25,8 @@ const buttonVariants = cva(
         link: 'text-primary items-start justify-start underline-offset-4 hover:underline',
         outline: 'border border-border bg-background hover:bg-card hover:text-accent-foreground',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        aonik: 'hover:bg-primary hover:text-white text-primary-foreground lg:text-lg font-bold',
+        aonik:
+          'hover:bg-primary hover:text-white w-full text-primary-foreground lg:text-lg font-bold',
       },
     },
   },

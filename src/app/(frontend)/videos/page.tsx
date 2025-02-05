@@ -1,8 +1,7 @@
 'use client'
-import ComingSoon from '@/components/ComingSoon/ComingSoon'
 import React, { useEffect, useState } from 'react'
-import Player from './Player'
 import { Video } from '@/payload-types'
+import VideoCard from './VideoCard'
 
 function VideoPage() {
   const [videos, setVideos] = useState<Video[]>()
@@ -17,10 +16,17 @@ function VideoPage() {
   }, [])
   console.log(videos)
   return (
-    <div>
-      <ComingSoon />
-      {videos?.map((v) => <Player key={v.id} link={v.videoLink} title={v.title} />)}
-    </div>
+    <section className="mt-12 mx-auto px-4 max-w-screen-xl md:px-8">
+      <div className="text-center">
+        <h1 className="text-3xl text-gray-800 font-semibold">Knowledge can save life.</h1>
+        <p className="mt-3 text-gray-500">
+          We worry about you, and you should also worry about your health.
+        </p>
+      </div>
+      <div className="mt-12 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        {videos?.map((video) => <VideoCard key={video.id} video={video} />)}
+      </div>
+    </section>
   )
 }
 
