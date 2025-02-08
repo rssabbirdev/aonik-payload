@@ -7,7 +7,7 @@ import { Appointment } from '@/payload-types'
 import AccessibleText from '@/components/AccessibleText/AccessibleText'
 import { useSearchParams } from 'next/navigation'
 
-function AppointmentPage() {
+function AppointmentPageWithoutSuspense() {
   const params = useSearchParams()
   const [eid, setEid] = useState('')
   const [appointment, setAppointment] = useState<Appointment>()
@@ -213,8 +213,10 @@ function AppointmentPage() {
   )
 }
 
-export default (
-  <Suspense>
-    <AppointmentPage />
-  </Suspense>
-)
+export default function AppointmentPage() {
+  return (
+    <Suspense>
+      <AppointmentPageWithoutSuspense />
+    </Suspense>
+  )
+}
