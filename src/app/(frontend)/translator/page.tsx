@@ -228,7 +228,7 @@ function TranslatorPage() {
   }, [conversation])
 
   return (
-    <section className="container mt-10">
+    <section className="container mt-10 animate-popUp">
       <ChooseLanguage
         firstLanguage={firstLanguage}
         secondLanguage={secondLanguage}
@@ -244,7 +244,7 @@ function TranslatorPage() {
             <div key={index} className="flex flex-col gap-5">
               <div className={`text-left`}>
                 <div className="flex">
-                  <div className="bg-primary flex items-center gap-2 text-lg rounded-3xl rounded-tl-none text-white py-3 px-4">
+                  <div className="animate-popUp bg-primary flex items-center gap-2 text-lg rounded-3xl rounded-tl-none text-white py-3 px-4">
                     <AccessibleText
                       text={c.conversationFirstText}
                       lang={getSelectedLangCode(firstLanguage)}
@@ -256,7 +256,7 @@ function TranslatorPage() {
               </div>
               <div className={`text-right`}>
                 <div className="flex justify-end">
-                  <div className="bg-primary-foreground min-w-40 flex items-center gap-2 text-lg rounded-3xl rounded-tr-none text-white py-3 px-4">
+                  <div className="animate-popUp bg-primary-foreground min-w-40 flex items-center gap-2 text-lg rounded-3xl rounded-tr-none text-white py-3 px-4">
                     <AccessibleText
                       text={c.conversationSecondText}
                       lang={getSelectedLangCode(secondLanguage)}

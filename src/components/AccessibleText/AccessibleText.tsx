@@ -1,3 +1,4 @@
+'use client'
 import { useSpeech } from '@/hooks/useSpeech'
 import { useEffect } from 'react'
 import { IoVolumeHigh } from 'react-icons/io5'

@@ -35,10 +35,10 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     } else if (pathname === '/translator') {
       setPathnameStatus(false)
     } else {
-      setPathnameStatus(true)
+      setPathnameStatus(false)
     }
   }, [headerTheme, pathname, theme])
-  if (pathname === '/home') {
+  if (pathname === '/home' || pathname === '/home-two') {
     return redirect('/')
   }
 
@@ -50,8 +50,45 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     }
   }
   return (
-    <header className="container relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
-      {pathnameStatus ? (
+    <header className="container relative z-20" {...(theme ? { 'data-theme': theme } : {})}>
+      <div>
+        <nav className=" w-full animate-popUp">
+          <div
+            className={`items-center max-w-screen-xl mx-auto flex ${pathname !== '/' ? 'justify-between' : 'justify-center'}`}
+          >
+            {pathname !== '/' && (
+              <div>
+                <RiArrowLeftDoubleFill
+                  onClick={() => window.history.back()}
+                  className={`rounded-full h-8 w-8 bg-primary text-white hover:bg-primary-foreground cursor-pointer`}
+                />
+              </div>
+            )}
+            <div className="flex items-center justify-between">
+              <Link href="/">
+                {/*eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/17.png" width={150} height={50} alt="Aonik Logo" />
+              </Link>
+            </div>
+
+            <button
+              onClick={() => handleForward()}
+              className="flex justify-center items-center gap-2"
+            >
+              {pathname === '/appointment' && (
+                <FaMicrophoneAlt className="rounded-full h-8 w-8 text-primary cursor-pointer" />
+              )}
+              {pathname === '/translator' && (
+                <LuIdCard className="rounded-full h-8 w-8 text-primary cursor-pointer" />
+              )}
+              {pathname !== '/' && (
+                <RiArrowRightDoubleFill className="rounded-full h-8 w-8 bg-primary text-white hover:bg-primary-foreground cursor-pointer" />
+              )}
+            </button>
+          </div>
+        </nav>
+      </div>
+      {/* {pathnameStatus ? (
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex md:h-16 items-center md:justify-center justify-end">
             <div className="md:block hidden">
@@ -100,12 +137,12 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               <div>
                 <RiArrowLeftDoubleFill
                   onClick={() => window.history.back()}
-                  className="rounded-full h-8 w-8 bg-primary text-white hover:bg-primary-foreground cursor-pointer"
+                  className={`rounded-full h-8 w-8 bg-primary text-white hover:bg-primary-foreground cursor-pointer`}
                 />
               </div>
               <div className="flex items-center justify-between">
                 <Link href="/">
-                  {/*eslint-disable-next-line @next/next/no-img-element */}
+                  // eslint-disable-next-line @next/next/no-img-element
                   <img src="/17.png" width={150} height={50} alt="Aonik Logo" />
                 </Link>
               </div>
@@ -125,7 +162,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             </div>
           </nav>
         </div>
-      )}
+      )} */}
     </header>
   )
 }

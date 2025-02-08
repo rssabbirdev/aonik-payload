@@ -123,3 +123,8 @@ html[data-theme='light'] {
     background: #89a2718f;
   }
 }
+#bg-img{
+  background: url('https://cdn.prod.website-files.com/64cabeab4a57a9fde42d0952/64d14a34abd43f1eb87c4535_hero-background.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}

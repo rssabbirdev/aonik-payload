@@ -13,7 +13,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import HomePage from '../home/page'
+import HomeTwo from '../home-two/page'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -62,9 +62,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   return (
     <>
-      {slug === 'home' ? (
+      {slug === 'home' || slug === 'home-two' ? (
         <div>
-          <HomePage />
+          <HomeTwo />
         </div>
       ) : (
         <article className="pt-16 pb-24">

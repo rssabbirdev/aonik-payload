@@ -24,13 +24,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled } = await draftMode()
 
   return (
-    <html className={inter.className} lang="en" suppressHydrationWarning>
+    <html className={inter.className} lang="en" translate="no" suppressHydrationWarning>
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
-      <body className="scrollbar">
+      <body className="scrollbar" id="bg-img">
         <Providers>
           <AdminBar
             adminBarProps={{

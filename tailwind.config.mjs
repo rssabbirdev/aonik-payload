@@ -45,10 +45,25 @@ const config = {
         xl: '80rem',
       },
     },
+    keyframes: {
+      slideIn: {
+        '0%': { transform: 'translateX(-10%)', opacity: '0' },
+        '100%': { transform: 'translateX(0)', opacity: '1' },
+      },
+      slideInRight: {
+        '0%': { transform: 'translateX(10%)', opacity: '0' },
+        '100%': { transform: 'translateX(0)', opacity: '1' },
+      },
+      popUp: {
+        '0%': { transform: 'translateY(5%)', opacity: '0' },
+        '100%': { transform: 'translateY(0)', opacity: '1' },
+      },
+    },
     extend: {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        popUp: 'popUp 0.8s ease-out forwards',
       },
       borderRadius: {
         lg: 'var(--radius)',
