@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import { IoLocationSharp } from 'react-icons/io5'
 import { LuIdCard } from 'react-icons/lu'
 import { FaUserDoctor } from 'react-icons/fa6'
@@ -213,4 +213,8 @@ function AppointmentPage() {
   )
 }
 
-export default AppointmentPage
+export default (
+  <Suspense>
+    <AppointmentPage />
+  </Suspense>
+)
