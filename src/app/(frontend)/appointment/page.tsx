@@ -6,6 +6,7 @@ import { FaUserDoctor } from 'react-icons/fa6'
 import { Appointment } from '@/payload-types'
 import AccessibleText from '@/components/AccessibleText/AccessibleText'
 import { useSearchParams } from 'next/navigation'
+import Image from 'next/image'
 
 function AppointmentPageWithoutSuspense() {
   const params = useSearchParams()
@@ -111,8 +112,7 @@ function AppointmentPageWithoutSuspense() {
               </button>
               {showMap && (
                 <div className="mt-8">
-                  {/*eslint-disable-next-line @next/next/no-img-element*/}
-                  <img src="/map.jpeg" alt="map" />
+                  <Image height={500} width={900} src="/map.jpeg" alt="map" />
                 </div>
               )}
             </section>
@@ -198,8 +198,7 @@ function AppointmentPageWithoutSuspense() {
               </button>
               {showMap && (
                 <div className="mt-8">
-                  {/*eslint-disable-next-line @next/next/no-img-element*/}
-                  <img src="/map.jpeg" alt="map" />
+                  <Image height={500} width={900} src="/map.jpeg" alt="map" />
                 </div>
               )}
             </section>
