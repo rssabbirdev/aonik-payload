@@ -13,6 +13,7 @@ function ChooseLanguage({
   secondLanguage: string
   setSecondLanguage: Dispatch<SetStateAction<string>>
 }) {
+  const options = ['Arabic', 'English', 'Bangla', 'Hindi', 'Spanish', 'French']
   return (
     <div className="flex justify-between items-center">
       <div>
@@ -34,11 +35,13 @@ function ChooseLanguage({
             id="HeadlineAct"
             className="mt-1.5 p-3 border border-primary-foreground text-primary-foreground rounded-lg font-serif"
           >
-            <option value="English">English</option>
-            <option value="Bangla">Bangla</option>
-            <option value="Hindi">Hindi</option>
-            <option value="Spanish">Spanish</option>
-            <option value="French">French</option>
+            {options
+              ?.filter((option) => option !== secondLanguage)
+              ?.map((op) => (
+                <option key={op} value={op}>
+                  {op}
+                </option>
+              ))}
           </select>
         </div>
       </div>
@@ -61,9 +64,13 @@ function ChooseLanguage({
             id="HeadlineAct"
             className="mt-1.5 p-3 border border-primary-foreground text-primary-foreground rounded-lg font-serif"
           >
-            <optgroup label="United Arab Emirates">
-              <option value="Arabic">Arabic</option>
-            </optgroup>
+            {options
+              ?.filter((option) => option !== firstLanguage)
+              ?.map((op) => (
+                <option key={op} value={op}>
+                  {op}
+                </option>
+              ))}
           </select>
         </div>
       </div>

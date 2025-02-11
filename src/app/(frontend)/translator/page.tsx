@@ -237,7 +237,7 @@ function TranslatorPage() {
       />
       <div
         ref={chatboxRef}
-        className="overflow-y-auto h-[30vh] border rounded-l-lg rounded-r-lg scroll-smooth p-5 my-10 scrollbar"
+        className="overflow-y-auto bg-white h-[30vh] border rounded-l-lg rounded-r-lg scroll-smooth p-5 my-10 scrollbar"
       >
         <div className="flex flex-col gap-5">
           {conversation?.map((c, index) => (
